@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CGPA Calculator</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"
+    />
+    <script>
+      function calculateCGPA() {
+        var gradeInputs = document.getElementsByClassName("grade-input");
+        var totalGradePoints = 0;
+        var numberOfSubjects = gradeInputs.length;
+
+        for (var i = 0; i < numberOfSubjects; i++) {
+          var gradeInput = gradeInputs[i];
+          var grade = gradeInput.value.toUpperCase(); // Convert to uppercase
+          var gradePoint;
+          switch (grade) {
+            case "S":
+              gradePoint = 10;
+              break;
+            case "A":
+              gradePoint = 9;
+              break;
+            case "B":
+              gradePoint = 8;
+              break;
+            case "C":
+              gradePoint = 7;
+              break;
+            case "D":
+              gradePoint = 6;
+              break;
+            case "E":
+              gradePoint = 5;
+              break;
+            default:
+              gradePoint = 0;
+              break;
+          }
+
+          totalGradePoints += gradePoint;
+        }
+
+        var cgpa = totalGradePoints / numberOfSubjects;
+
+        // Displaying the CGPA
+        document.getElementById("cgpa-result").textContent =
+          "CGPA: " + cgpa.toFixed(2);
+      }
+
+      function addGradeInput() {
+        var inputContainer = document.getElementById("input-container");
+
+        // Creating the grade input element
+        var gradeInput = document.createElement("input");
+        gradeInput.type = "text";
+        gradeInput.className = "grade-input";
+        gradeInput.placeholder = "Enter grade";
+        inputContainer.appendChild(gradeInput);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>CGPA Calculator</h1>
+
+    <div id="input-container">
+      <input type="text" class="grade-input" placeholder="Enter grade" />
+    </div>
+
+    <button onclick="addGradeInput()">Add Grade Input</button>
+    <button onclick="calculateCGPA()">Calculate CGPA</button>
+
+    <div id="cgpa-result"></div>
+  </body>
+</html>
